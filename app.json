@@ -1,0 +1,12 @@
+{
+  "name": "twilio-messaging",
+  "displayName": "twilio-messaging",
+  "expo": {
+    "name": "twilio-messaging",
+    "slug": "twilio-messaging",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
