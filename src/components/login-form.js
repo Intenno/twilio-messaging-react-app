@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import {Button, Input} from 'react-native-elements';
+import { Button, Input } from 'react-native-elements';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -12,8 +12,8 @@ export default class LoginForm extends Component {
   render() {
     return (
       <View style = {styles.container}>
-        <Input placeholder = "Email" />
-        <Input placeholder = "Password" secureTextEntry={true}/>
+        <Input placeholder = "Email" leftIcon={{ type: 'font-awesome', name: 'envelope' }}/>
+        <Input placeholder = "Password" secureTextEntry={true} leftIcon={{ type: 'font-awesome', name: 'lock'}}/>
         <Button title = "Login" />
       </View>
     );

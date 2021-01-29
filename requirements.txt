@@ -1,0 +1,5 @@
+react-native-elements
+react-native-vector-icons
+json-server
+axios
+react-native-gifted-chat
