@@ -5,15 +5,22 @@ import LoginForm from './src/components/login-form';
 import Header from './src/components/header';
 import MessageList from './src/components/message-list';
 import Message from './src/components/message';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './src/reducers';
+import ReduxThunk from 'redux-thunk';
 
 export default function App() {
+  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
   return (
-    <View>
-      <Header title = "Messages"/>
-      <LoginForm />
-      {/* <MessageList /> */}
-      {/* <Message /> */}
-    </View>
+    <Provider store={store}>
+      <View>
+        <Header title = "Login"/>
+        <LoginForm />
+        {/* <MessageList /> */}
+        {/* <Message /> */}
+      </View>
+    </Provider>
   );
 }
 

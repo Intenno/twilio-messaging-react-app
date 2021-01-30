@@ -3,3 +3,7 @@ react-native-vector-icons
 json-server
 axios
 react-native-gifted-chat
+firebase
+redux
+react-redux
+redux-thunk
