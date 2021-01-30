@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import firebase from 'firebase';
 import { authInputChange, login } from '../actions';
@@ -24,10 +24,17 @@ class LoginForm extends Component {
     this.props.login({email, password});
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
+  showButton() {
+    /* if (this.props.loading) {
+      return (
+        <View>
+          <ActivityIndicator size ={'small'}/>
+        </View>
+      );
+    } */
+    return (
+    <Button title = "Login" onPress={this.login.bind(this)}/>
+    );
   }
 
   render() {
@@ -46,7 +53,7 @@ class LoginForm extends Component {
         leftIcon={{ type: 'font-awesome', name: 'lock'}}
         onChangeText={text => this.props.authInputChange({'field': 'password', 'value': text})}
         />
-        <Button title = "Login" onPress={this.login.bind(this)}/>
+        {this.showButton()}
       </View>
     );
   }
@@ -57,7 +64,9 @@ class LoginForm extends Component {
 const mapStateToProps = state => {
   return {
     email: state.auth.email,
-    password: state.auth.password
+    password: state.auth.password,
+    loading: state.auth.user,
+    error: state.auth.error
   }
 }
 

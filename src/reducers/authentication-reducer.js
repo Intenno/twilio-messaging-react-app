@@ -2,7 +2,8 @@ const intialState = {
     email: '',
     password: '',
     user : {},
-    error: ''
+    error: '',
+    loading: false
 };
 
 export default (state = intialState, action) => {
@@ -12,10 +13,12 @@ export default (state = intialState, action) => {
             return { ...state, [action.payload.field]: action.payload.value}
         case 'LOGIN_SUCCESS':
             console.log('success!');
-            return { ...state, user: action.payload};
+            return { ...state, user: action.payload, loading: false};
+        case 'LOADING':
+            return { ...state, loading: true};
         case 'LOGIN_FAILURE':
             console.log('error!');
-            return { ...state, error: 'Authentication Failed'}
+            return { ...state, error: 'Authentication Failed', loading: false}
         default: 
             return state;
     }
