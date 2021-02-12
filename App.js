@@ -15,10 +15,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <View>
-        <Header title = "Login"/>
-        <LoginForm />
-        {/* <MessageList /> */}
-        {/* <Message /> */}
+        <Header title = "Message"/>
+        <Message />
       </View>
     </Provider>
   );
