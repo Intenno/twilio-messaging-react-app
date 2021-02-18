@@ -39,10 +39,6 @@ function ShowNewMessage({navigation}) {
 function ShowMessageList({navigation}) {
   return (
     <View>
-      <View style={styles.headerContainer}>
-        <Text style={styles.text}> Messages </Text>
-        <Icon type='ionicon' name='create-outline' onPress={() => navigation.navigate('New Message')}/>
-      </View>
       <MessageList />
     </View>
   );
@@ -66,7 +62,7 @@ const MessageStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-export default function App({navigation}) {
+export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
@@ -76,15 +72,15 @@ export default function App({navigation}) {
               <MessageStack.Screen 
               name="Messages" 
               component={ShowMessageList} 
-              options = {{
+              options = {({navigation}) => ({
                 headerRight: () => (
                   <Icon
                   type='ionicon'
                   name='create-outline'
-                  onPress={() => alert("Hello")}
+                  onPress={() => navigation.navigate("New Message")}
                   />
                 )
-              }}
+              })}
               />
               <MessageStack.Screen name="New Message" component={ShowNewMessage} />
             </MessageStack.Navigator>
