@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './src/reducers';
 import ReduxThunk from 'redux-thunk';
+import Profile from './src/components/profile';
 
 export default function App() {
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
@@ -16,7 +17,7 @@ export default function App() {
     <Provider store={store}>
       <View>
         <Header title = "Message"/>
-        <Message />
+        <LoginForm />
       </View>
     </Provider>
   );
