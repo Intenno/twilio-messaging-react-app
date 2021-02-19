@@ -82,7 +82,7 @@ export default function App() {
 
           if (route.name === 'Messages') {
             iconName = 'chatbox-ellipses-outline';
-          } else if (route.name === 'Profile') {
+          } else if (route.name === 'Account') {
             iconName = 'person-outline';
           }
 
@@ -111,11 +111,11 @@ export default function App() {
             </MessageStack.Navigator>
           )}
         </Tab.Screen>
-        <Tab.Screen name="Profile">
+        <Tab.Screen name="Account">
           {() => (
             <ProfileStack.Navigator>
               <ProfileStack.Screen 
-              name="Profile" 
+              name="Account" 
               component={ShowProfile} 
               options = {({navigation}) => ({
                 headerRight: () => (
