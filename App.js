@@ -13,8 +13,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-import { HeaderButtons } from 'react-navigation-header-buttons';
 import { create } from 'react-test-renderer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 /* export default function App() {
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
@@ -65,7 +65,22 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === 'Messages') {
+            iconName = 'chatbox-ellipses-outline';
+          } else if (route.name === 'Profile') {
+            iconName = 'person-outline';
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      >
         <Tab.Screen name="Messages">
           {() => (
             <MessageStack.Navigator>
