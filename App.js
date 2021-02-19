@@ -9,6 +9,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './src/reducers';
 import ReduxThunk from 'redux-thunk';
 import Profile from './src/components/profile';
+import Settings from './src/components/settings';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
@@ -47,6 +48,7 @@ function ShowMessageList({navigation}) {
 function ShowProfile({navigation}) {
   return (
     <View>
+      <Profile/>
       <Button
         title="Press me"
         color="#f194ff"
@@ -54,6 +56,14 @@ function ShowProfile({navigation}) {
       />
     </View>
   );
+}
+
+function ShowSettings({navigation}) {
+  return (
+    <View>
+      <Settings/>
+    </View>
+  )
 }
 
 const ProfileStack = createStackNavigator();
@@ -107,15 +117,17 @@ export default function App() {
               <ProfileStack.Screen 
               name="Profile" 
               component={ShowProfile} 
-              options={{
+              options = {({navigation}) => ({
                 headerRight: () => (
                   <Icon
                   type='ionicon'
                   name='settings-outline'
+                  onPress={() => navigation.navigate("Settings")}
                   />
                 )
-              }}
+              })}
               />
+              <ProfileStack.Screen name="Settings" component={ShowSettings} />
             </ProfileStack.Navigator>
           )}
         </Tab.Screen>
