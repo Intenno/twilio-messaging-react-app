@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button, Input } from 'react-native-elements';
-//import { messageInputChange, send } from '../actions';
-//import { connect } from 'react-redux';
+import { messageInputChange, send } from '../actions';
+import { connect } from 'react-redux';
 
-export default class Message extends Component {
+class Message extends Component {
 
   send() {
     const { recipient, message } = this.props;
@@ -23,19 +23,21 @@ export default class Message extends Component {
           <View style={{flexDirection: 'row', marginTop: 20}}>
             <Text style={{fontSize: 20, color: 'black'}}> To: </Text>
             <TextInput 
-            //value = {this.props.recipient}
             style={{ height:35, width: 300, borderColor:'gray', borderWidth:1}}
-            //onChangeText={text => this.props.messageInputChange({'field': 'recipient', 'value': text})}
+            id="to"
+            value = {this.props.to}
+            onChangeText={text => this.props.messageInputChange({'field': 'to', 'value': text})}
             />
           </View>
           <View>
             <TextInput
-              //value={this.props.message}
               style={{ height: 100, borderColor: 'gray', borderWidth: 1, marginTop: 20 }}
-              //onChangeText={text => this.props.messageInputChange({'field': 'message', 'value': text})}
               placeholder="Type message here"
               multiline
               numberOfLines={4}
+              id="body"
+              value = {this.props.body}
+              onChangeText={text => this.props.messageInputChange({'field': 'body', 'value': text})}
             />
           </View>
           {this.showButton()}
@@ -44,11 +46,12 @@ export default class Message extends Component {
   }
 }
 
-/* const mapStateToProps = state => {
+const mapStateToProps = state => {
   return {
-    recipient: state.message.recipient,
-    message: state.message.message,
+    to: state.message.to,
+    body: state.message.body
   }
 }
 
-export default connect(mapStateToProps, {authInputChange, login})(LoginForm); */
+export default connect(mapStateToProps, {messageInputChange})(Message);
+

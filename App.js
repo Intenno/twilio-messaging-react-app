@@ -73,72 +73,69 @@ const MessageStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          let iconName;
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
 
-          if (route.name === 'Messages') {
-            iconName = 'chatbox-ellipses-outline';
-          } else if (route.name === 'Account') {
-            iconName = 'person-outline';
-          }
+            if (route.name === 'Messages') {
+              iconName = 'chatbox-ellipses-outline';
+            } else if (route.name === 'Account') {
+              iconName = 'person-outline';
+            }
 
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-      >
-        <Tab.Screen name="Messages">
-          {() => (
-            <MessageStack.Navigator>
-              <MessageStack.Screen 
-              name="Messages" 
-              component={ShowMessageList} 
-              options = {({navigation}) => ({
-                headerRight: () => (
-                  <Icon
-                  type='ionicon'
-                  name='create-outline'
-                  onPress={() => navigation.navigate("New Message")}
-                  />
-                )
-              })}
-              />
-              <MessageStack.Screen name="New Message" component={ShowNewMessage} />
-            </MessageStack.Navigator>
-          )}
-        </Tab.Screen>
-        <Tab.Screen name="Account">
-          {() => (
-            <ProfileStack.Navigator>
-              <ProfileStack.Screen 
-              name="Account" 
-              component={ShowProfile} 
-              options = {({navigation}) => ({
-                headerRight: () => (
-                  <Icon
-                  type='ionicon'
-                  name='settings-outline'
-                  onPress={() => navigation.navigate("Settings")}
-                  />
-                )
-              })}
-              />
-              <ProfileStack.Screen name="Settings" component={ShowSettings} />
-            </ProfileStack.Navigator>
-          )}
-        </Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
-    /* { <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Messages" component={ShowMessageList} />
-        <Tab.Screen name="Profile" component={ShowProfile} />
-      </Tab.Navigator>
-    </NavigationContainer> } */
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        >
+          <Tab.Screen name="Messages">
+            {() => (
+              <MessageStack.Navigator>
+                <MessageStack.Screen 
+                name="Messages" 
+                component={ShowMessageList} 
+                options = {({navigation}) => ({
+                  headerRight: () => (
+                    <Icon
+                    type='ionicon'
+                    name='create-outline'
+                    onPress={() => navigation.navigate("New Message")}
+                    />
+                  )
+                })}
+                />
+                <MessageStack.Screen name="New Message" component={ShowNewMessage} />
+              </MessageStack.Navigator>
+            )}
+          </Tab.Screen>
+          <Tab.Screen name="Account">
+            {() => (
+              <ProfileStack.Navigator>
+                <ProfileStack.Screen 
+                name="Account" 
+                component={ShowProfile} 
+                options = {({navigation}) => ({
+                  headerRight: () => (
+                    <Icon
+                    type='ionicon'
+                    name='settings-outline'
+                    onPress={() => navigation.navigate("Settings")}
+                    />
+                  )
+                })}
+                />
+                <ProfileStack.Screen name="Settings" component={ShowSettings} />
+              </ProfileStack.Navigator>
+            )}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer> 
+    </Provider>
   );
 }
 
