@@ -27,9 +27,20 @@ export const login = ({email, password}) => {
     }
 }
 
-export const send = ({recipient, message}) => {
+export const send = ({to, body}) => {
     return (dispatch) => {
         dispatch({type: 'SENDING'});
-        // TODO: Twilio stuff here
+        const accountSid = process.env.TWILIO_ACCOUNT_SID;
+        const authToken = process.env.TWILIO_AUTH_TOKEN;
+        // Breaks on "require('twilio')"
+        const client = require('twilio')(accountSid, authToken);
+
+        client.messages
+        .create({
+            body: 'Hello, World!',
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: '+15407551907'
+        })
+        .then(message => console.log(message.sid));
     }
 }

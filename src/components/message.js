@@ -7,13 +7,15 @@ import { connect } from 'react-redux';
 class Message extends Component {
 
   send() {
-    const { recipient, message } = this.props;
-    this.props.send({recipient, message});
+    const { to, body } = this.props;
+
+    this.props.send({ to, body});
+    //console.log("sending");
   }
 
-  showButton() {
+  showButton() { 
     return (
-    <Button style={{marginTop: 20}} title = "Send" />
+    <Button style={{marginTop: 20}} title = "Send" onPress={this.send.bind(this)}/>
     );
   }
 
@@ -53,5 +55,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {messageInputChange})(Message);
+export default connect(mapStateToProps, {messageInputChange, send})(Message);
 
